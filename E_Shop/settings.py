@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'E_Shop'
+    'E_Shop.apps.E_ShopConfig'
 ]
 
 MIDDLEWARE = [
@@ -78,13 +78,17 @@ WSGI_APPLICATION = 'E_Shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'shop_django',
         'ENGINE': 'django.db.backends.mysql',
+        'HOST':'localhost',
         'USER': 'root',
+        'NAME': 'shop_django',
         'PASSWORD': '',
         'OPTIONS': {
           'autocommit': True,
         },
+        'TEST':{
+            'NAME':'shop_django',
+        }
     }
 }
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Cart Page</title>
+   
+</head>
+<body>
+<table border= "1" align="center">
+    <tr>
+        <th>Id</th>
+        <th>Model</th>
+        <th>Id</th>
+        <th>Model</th>
+
+    </tr>
+<tr>
+    {% for product in products %}
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    {% endfor %}
+</tr>
+{% comment %} <tr>
+    {% for i in Prod2 %}
+        <td>{{i}}</td>
+    {% endfor %}
+</tr> {% endcomment %}
+</table>
+</body>
+</html>

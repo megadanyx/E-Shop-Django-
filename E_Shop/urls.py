@@ -21,6 +21,6 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', homePage),
-    path('products', CatalogPage),
-    path('products/generate', addProdBag)
+    # path('products', CatalogPage),
+    # path('products/generate', addProdBag)
 ]

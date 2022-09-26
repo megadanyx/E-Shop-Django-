@@ -26,14 +26,14 @@ def homePage(request):
     return render(request, 'home.html' ,{'version':'1.0.0'})
 
 
-def CatalogPage(request):
-    product = Product.objects.all()
-    return render(request, 'Catalog.html' , {"products" : product })
+# def CatalogPage(request):
+#     product = Product.objects.all()
+#     return render(request, 'Catalog.html' , {"products" : product })
 
 def seedData(request):
 
     # for id in range(5,7):
-            ####### Produs generate ############
+            ###### Produs generate ############
             # r = requests.get(f"https://api.escuelajs.co/api/v1/products/{id}")
             # json_data = r.json()
             # # print(json_data)
@@ -46,9 +46,10 @@ def seedData(request):
             #     price = price
             #     )
             # stock = ProductStock.objects.create(quantity=5*id, product=product) 
-            ####### Produs generate ############
+            ###### Produs generate ############
 
             ####### Client generate ############
+            # for id in range(1,7)
             # r = requests.get(f"https://api.storerestapi.com/users")
             # json_data = r.json()
 
@@ -71,13 +72,13 @@ def seedData(request):
 
 
 
-def addProdBag(request,Client_id=1,produs_id=11,quantity=10):
+# def addProdBag(request,Client_id=1,produs_id=11,quantity=10):
     
-    Produs = Product.objects.get(pk =produs_id)
-    money = Money.objects.get(pk=Produs.price_id)
-    # cost = int(money.amount) * quantity 
-    client = Client.objects.get(pk=Client_id)   
-    client_bag = Bag.objects.create(cost_id=money.id, client = client ) 
-    BagItem.objects.create(quantity = quantity, product= Produs , bag = client_bag )    
+#     Produs = Product.objects.get(pk =produs_id)
+#     money = Money.objects.get(pk=Produs.price_id)
+#     # cost = int(money.amount) * quantity 
+#     client = Client.objects.get(pk=Client_id)   
+#     client_bag = Bag.objects.create(cost_id=money.id, client = client ) 
+#     BagItem.objects.create(quantity = quantity, product= Produs , bag = client_bag )    
 
-    return HttpResponse(f"<h3 align = 'center'> The final cost of the product {Produs.name} =  {money.amount * quantity}  </h3>")
+#     return HttpResponse(f"<h3 align = 'center'> The final cost of the product {Produs.name} =  {money.amount * quantity}  </h3>")
