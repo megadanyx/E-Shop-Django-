@@ -1,5 +1,6 @@
 from pydoc import describe
 from django.db import models
+from django.utils import timezone
 
 class Money(models.Model): 
     id = models.AutoField(primary_key=True)
@@ -29,11 +30,14 @@ class Client(models.Model):
     phone = models.CharField(max_length=15, default='')
     is_vip = models.BooleanField()
     password = models.CharField(max_length=160)
+    created = models.DateTimeField(auto_now_add=True)
 
 class Bag(models.Model):
     id = models.AutoField(primary_key=True)
     cost = models.ForeignKey(Money,on_delete= models.CASCADE, null = True)
     client = models.ForeignKey(Client,on_delete= models.CASCADE , null = True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
 class BagItem(models.Model):
     id = models.AutoField(primary_key=True)

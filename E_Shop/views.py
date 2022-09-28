@@ -9,76 +9,44 @@ import requests
 
 
 
-# this_cart = {"Prod1":['iPhone',
-#                     'ML1.0.1',
-#                     299,
-#                     'USD'],
-#                 "Prod2":['Samsung',
-#                          'Galaxy 2.0.1',
-#                            399,
-#                           'USD']
-#                     }
-    
-
-
-def homePage(request):
-    response = "<h1 align ='center'>Welcom to e-shop!</h1>"
-    return render(request, 'home.html' ,{'version':'1.0.0'})
-
 
 # def CatalogPage(request):
 #     product = Product.objects.all()
 #     return render(request, 'Catalog.html' , {"products" : product })
 
-def seedData(request):
-
-    # for id in range(5,7):
-            ###### Produs generate ############
-            # r = requests.get(f"https://api.escuelajs.co/api/v1/products/{id}")
-            # json_data = r.json()
-            # # print(json_data)
-            # price = Money.objects.create(
-            #     amount= json_data['price'], currency = 'EUR')
-            # product = Product.objects.create(
-            #     id = json_data['id'],
-            #     name = json_data['title'],
-            #     description = json_data['description'][:280],
-            #     price = price
-            #     )
-            # stock = ProductStock.objects.create(quantity=5*id, product=product) 
-            ###### Produs generate ############
-
-            ####### Client generate ############
-            # for id in range(1,7)
-            # r = requests.get(f"https://api.storerestapi.com/users")
-            # json_data = r.json()
-
-            # Client.objects.create(
-            #     name = json_data['data'][id]['name'],
-            #     email = json_data['data'][id]['email'],
-            #     phone = json_data['data'][id]['number'],
-            #     is_vip = False,
-            #     password = json_data['data'][id]['password'],
-            #     )
-
-            ####### Client generate ############
-            ####### Bag/Items generate ############
 
 
 
+# Sa fie gasit clientul dupa email si parola (ar corespunde cu logarea pe site)
 
-            ####### Bag/Items generate ############
-    return HttpResponse(f"<h3 align = 'center'> aa </h3>")
+def LogIn(request,email = 'kevin@gmail.com', password = 'kev02937@'):
+    db_qset = Client.objects.filter(email = email,password= password)
+    if  len(db_qset) == 1:
+        return HttpResponse(f"<h1 align ='center'>{db_qset[0].name}<br>{db_qset[0].phone}</h1>")
+    return HttpResponse(f"<h1 align ='center'> This email {email} or pass {password} is incorrectly</h1>")
 
 
+# Sa fie gasit cosul clientului dupa id-ul clientului
+def searchBag(request,client__id= 1):
+    Bag_client = Bag.objects.filter(client__id = 1)
+    if  len(Bag_client) > 1:
+        for i in range(Bag_client):
+            return HttpResponse(f"<h1 align ='center'> Client{client__id} have bag_id: {Bag_client[i].client_id}<br>Cost_id:{Bag_client[i].cost_id}</h1>")
+    # return HttpResponse(f"<h1 align ='center'> Client {client__id} have bag_id: {Bag_client[0].client_id}<br>Cost_id:{Bag_client[0].cost_id}</h1>")
+    return Bag_client[0]
+# Sa fie gasite toate itemurile din cosul clientului dupa id-ul clientului
+def searchBagItems(request,client__id=1):
+    bag = searchBag(client__id)
+    Items = BagItem.objects.filter(bag_id = bag.id)
+    return Items
+    # Sa fie numarate toate itemurile din cosul clientului dupa id-ul clientului
 
-# def addProdBag(request,Client_id=1,produs_id=11,quantity=10):
-    
-#     Produs = Product.objects.get(pk =produs_id)
-#     money = Money.objects.get(pk=Produs.price_id)
-#     # cost = int(money.amount) * quantity 
-#     client = Client.objects.get(pk=Client_id)   
-#     client_bag = Bag.objects.create(cost_id=money.id, client = client ) 
-#     BagItem.objects.create(quantity = quantity, product= Produs , bag = client_bag )    
+def countItems(request,client__id = 1):
+    Items = searchBagItems(client__id)
+    return HttpResponse(f"<h1 align ='center'> Client {client__id} have bag_items: {len(Items)} </h1>")
 
-#     return HttpResponse(f"<h3 align = 'center'> The final cost of the product {Produs.name} =  {money.amount * quantity}  </h3>")
+    # Sa fie returnat True daca o cantitate dorita pentru un anumit produs este in stock si False daca nu 
+def checkStock(request,product_id = 1,quantity_1 = 11):
+    stock  = ProductStock.objects.filter(product__id=product_id ,quantity__gte=quantity_1)
+    # print(stock)
+    return True if len(stock) > 0 else False
