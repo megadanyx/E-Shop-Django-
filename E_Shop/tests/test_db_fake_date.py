@@ -1,3 +1,4 @@
+from email.mime import image
 from itertools import product
 from locale import currency
 from django.test import SimpleTestCase
@@ -26,7 +27,7 @@ class DbFakeData(SimpleTestCase):
 
         print("Starting database seeding.... PRODUCTS")
 
-        for id in range(1,11):
+        for id in range(1,21):
             r = requests.get(f"https://fakestoreapi.com/products/{id}")
             json_data = r.json()
 
@@ -36,6 +37,7 @@ class DbFakeData(SimpleTestCase):
             product = Product.objects.create(
                 id = json_data['id'],
                 name = json_data['title'],
+                image = json_data['image'],
                 description = json_data['description'][:280],
                 price = price
             )
@@ -101,7 +103,7 @@ class DbFakeData(SimpleTestCase):
     # 2. the actual test
     def test_data_integrity(self):
         print("Checking generated data integrity....")
-        self.assertEquals(self.totalCount , 19 , f"Nu este egala cu  {self.totalCount}")
+        self.assertEquals(self.totalCount , 29 , f"Nu este egala cu  {self.totalCount}")
 
 
 

@@ -1,18 +1,21 @@
-import email
-import json
 # from locale import currency
-from unicodedata import name
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import *
+from django.core.paginator import Paginator
 import requests
 
 
 
 
-# def CatalogPage(request):
-#     product = Product.objects.all()
-#     return render(request, 'Catalog.html' , {"products" : product })
+def CatalogPage(request):
+    product = Product.objects.all()
+    paginator = Paginator(product,4)
+    selected_pade_number = request.GET.get('page')
+    page = paginator.page(selected_pade_number)
+    product = page.object_list
+
+    return render(request, 'Catalog.html' , {"products" : product, "paginator": paginator, "page_number" : page.number})
 
 
 

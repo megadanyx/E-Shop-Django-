@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('home', homePage),
     path('', checkStock),
-    # path('products', CatalogPage),
+    path('products', CatalogPage),
     # path('products/generate', addProdBag)
 ]
