@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block stylesheet%}<link rel="stylesheet" href="/static/css/product.css"/> {% endblock stylesheet %}
+
+{% block content %}
+{% comment %} {% for product in range_product %} {% endcomment %}
+    <div class ="photo">
+    <img src="{{product.image}}">
+</div>
+<div class="product-price">
+    <h2>
+        {{product.name}}
+    </h2>
+        <h4> Price: {{product.price.amount}} {{product.price.currency}}</h4>
+        <h4> Stock: {{stock.quantity}}</h4>
+        <p class="text-description">
+            {{product.description}}
+        </p><p>{% lorem 2.2 b random %}</p>
+    <form action="/cart">
+        <label for="quantity">Choose a quantity:</label>
+        <input type="hidden" name="prod_id" value={{product.pk}}>
+        <select name="quantity">
+            {% for ind in range_stock %}
+            <option value="{{ind}}">{{ind}}</option>
+            {%endfor%}
+        </select>
+    </div>
+        <div class ="btn-wrapper" >
+                <input  type="submit" value="Buy">
+            </div>
+    </form>
+{% comment %} {%endfor%} {% endcomment %}
+{% endblock content%}

@@ -1,0 +1,91 @@
+body{
+    font-family: Arial;
+    background-color: rgb(231, 231, 231);
+}
+.big-container{
+    /* border: 1px solid #000; */
+    padding: 20px;
+    position: static;
+    height:800px;
+    margin-left : 50px;
+    margin-right : 50px;
+    margin-bottom : 100px;
+}
+.big-container h1{
+    margin-left: 40px;
+}
+
+.navbar-prod a:hover{
+    text-decoration: none;
+    color: white;
+}
+
+
+.navbar-prod li{
+    display: inline;
+    float: left;
+    position: relative;
+    left: 780px;
+    
+  }  
+.navbar-prod li a {
+    display: block;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    text-align: center;
+  }
+.navbar-prod ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #6ea2ddaf;
+  }
+.navbar-prod li a:hover {
+    background-color: rgba(26, 93, 170, 0.459)
+  }
+.subsol{
+    color: rgb(146, 126, 39);
+    padding: 10px;
+    position: relative; 
+    height: auto;
+    border-top: 10px dotted #212529;
+    background-color:  #212529;
+    font-family: Arial;
+
+}
+.subsol h1{
+    margin-top: 25px;
+    color:rgba(168, 140, 26, 0.749);
+    text-align: center;
+    text-shadow: 1px 1px #449;
+}
+.signup{
+    font-size: 15px;
+}
+.login{
+    padding-left: 530px;
+    /* margin-right: 70px; */
+}
+.cart-btn{
+    text-align: center;
+    display: inline-block;
+
+}
+.cart-btn a{
+    position: absolute;
+    margin-left: 1750px;
+    margin-top: 25px;
+    width: 100px;
+    height: 120px;
+    
+}
+.cart-btn img{
+    display: inline; 
+    width: 80px;
+}
+.cart-btn img:hover{
+    width: 100px;
+    display: inline;
+}
